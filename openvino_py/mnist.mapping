@@ -1,6 +1,10 @@
 <?xml version="1.0" ?>
 <mapping>
 	<map>
+		<framework name="70" out_port_id="0"/>
+		<IR id="18" name="70" out_port_id="1"/>
+	</map>
+	<map>
 		<framework name="0" out_port_id="0"/>
 		<IR id="0" name="0" out_port_id="0"/>
 	</map>
@@ -38,7 +42,7 @@
 	</map>
 	<map>
 		<framework name="61" out_port_id="61"/>
-		<IR id="9" name="Mul1_149/Fused_Mul_/FusedScaleShift_" out_port_id="3"/>
+		<IR id="9" name="Mul1_176/Fused_Mul_" out_port_id="3"/>
 	</map>
 	<map>
 		<framework name="62" out_port_id="62"/>
@@ -54,7 +58,7 @@
 	</map>
 	<map>
 		<framework name="65" out_port_id="65"/>
-		<IR id="13" name="Mul1_185/Fused_Mul_/FusedScaleShift_" out_port_id="3"/>
+		<IR id="13" name="Mul1_149/Fused_Mul_" out_port_id="3"/>
 	</map>
 	<map>
 		<framework name="66" out_port_id="66"/>
@@ -70,10 +74,6 @@
 	</map>
 	<map>
 		<framework name="69" out_port_id="69"/>
-		<IR id="17" name="Mul1_176/Fused_Mul_/FusedScaleShift_" out_port_id="3"/>
-	</map>
-	<map>
-		<framework name="70" out_port_id="0"/>
-		<IR id="18" name="70" out_port_id="1"/>
+		<IR id="17" name="Mul1_158/Fused_Mul_" out_port_id="3"/>
 	</map>
 </mapping>

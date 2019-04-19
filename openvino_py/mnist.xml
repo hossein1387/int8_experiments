@@ -4,7 +4,7 @@
 		<layer id="0" name="0" precision="FP32" type="Input">
 			<output>
 				<port id="0">
-					<dim>100</dim>
+					<dim>1</dim>
 					<dim>1</dim>
 					<dim>28</dim>
 					<dim>28</dim>
@@ -15,7 +15,7 @@
 			<data dilations="1,1" group="1" kernel="5,5" output="6" pads_begin="2,2" pads_end="2,2" strides="1,1"/>
 			<input>
 				<port id="0">
-					<dim>100</dim>
+					<dim>1</dim>
 					<dim>1</dim>
 					<dim>28</dim>
 					<dim>28</dim>
@@ -23,7 +23,7 @@
 			</input>
 			<output>
 				<port id="3">
-					<dim>100</dim>
+					<dim>1</dim>
 					<dim>6</dim>
 					<dim>28</dim>
 					<dim>28</dim>
@@ -38,7 +38,7 @@
 			<data exclude-pad="true" kernel="2,2" pads_begin="0,0" pads_end="0,0" pool-method="max" rounding_type="floor" strides="2,2"/>
 			<input>
 				<port id="0">
-					<dim>100</dim>
+					<dim>1</dim>
 					<dim>6</dim>
 					<dim>28</dim>
 					<dim>28</dim>
@@ -46,7 +46,7 @@
 			</input>
 			<output>
 				<port id="1">
-					<dim>100</dim>
+					<dim>1</dim>
 					<dim>6</dim>
 					<dim>14</dim>
 					<dim>14</dim>
@@ -57,7 +57,7 @@
 			<data dilations="1,1" group="1" kernel="5,5" output="16" pads_begin="2,2" pads_end="2,2" strides="1,1"/>
 			<input>
 				<port id="0">
-					<dim>100</dim>
+					<dim>1</dim>
 					<dim>6</dim>
 					<dim>14</dim>
 					<dim>14</dim>
@@ -65,7 +65,7 @@
 			</input>
 			<output>
 				<port id="3">
-					<dim>100</dim>
+					<dim>1</dim>
 					<dim>16</dim>
 					<dim>14</dim>
 					<dim>14</dim>
@@ -80,7 +80,7 @@
 			<data exclude-pad="true" kernel="2,2" pads_begin="0,0" pads_end="0,0" pool-method="max" rounding_type="floor" strides="2,2"/>
 			<input>
 				<port id="0">
-					<dim>100</dim>
+					<dim>1</dim>
 					<dim>16</dim>
 					<dim>14</dim>
 					<dim>14</dim>
@@ -88,7 +88,7 @@
 			</input>
 			<output>
 				<port id="1">
-					<dim>100</dim>
+					<dim>1</dim>
 					<dim>16</dim>
 					<dim>7</dim>
 					<dim>7</dim>
@@ -99,7 +99,7 @@
 			<data dilations="1,1" group="1" kernel="5,5" output="120" pads_begin="2,2" pads_end="2,2" strides="1,1"/>
 			<input>
 				<port id="0">
-					<dim>100</dim>
+					<dim>1</dim>
 					<dim>16</dim>
 					<dim>7</dim>
 					<dim>7</dim>
@@ -107,7 +107,7 @@
 			</input>
 			<output>
 				<port id="3">
-					<dim>100</dim>
+					<dim>1</dim>
 					<dim>120</dim>
 					<dim>7</dim>
 					<dim>7</dim>
@@ -119,10 +119,10 @@
 			</blobs>
 		</layer>
 		<layer id="6" name="58" precision="FP32" type="Reshape">
-			<data dim="100,5880"/>
+			<data dim="1,5880"/>
 			<input>
 				<port id="0">
-					<dim>100</dim>
+					<dim>1</dim>
 					<dim>120</dim>
 					<dim>7</dim>
 					<dim>7</dim>
@@ -130,7 +130,7 @@
 			</input>
 			<output>
 				<port id="1">
-					<dim>100</dim>
+					<dim>1</dim>
 					<dim>5880</dim>
 				</port>
 			</output>
@@ -139,13 +139,13 @@
 			<data alpha="0" beta="0" out-size="120"/>
 			<input>
 				<port id="0">
-					<dim>100</dim>
+					<dim>1</dim>
 					<dim>5880</dim>
 				</port>
 			</input>
 			<output>
 				<port id="3">
-					<dim>100</dim>
+					<dim>1</dim>
 					<dim>120</dim>
 				</port>
 			</output>
@@ -155,32 +155,32 @@
 			</blobs>
 		</layer>
 		<layer id="8" name="60" precision="FP32" type="Reshape">
-			<data dim="100, 120, 1"/>
+			<data dim="1, 120, 1"/>
 			<input>
 				<port id="0">
-					<dim>100</dim>
+					<dim>1</dim>
 					<dim>120</dim>
 				</port>
 			</input>
 			<output>
 				<port id="1">
-					<dim>100</dim>
+					<dim>1</dim>
 					<dim>120</dim>
 					<dim>1</dim>
 				</port>
 			</output>
 		</layer>
-		<layer id="9" name="Mul1_149/Fused_Mul_/FusedScaleShift_" precision="FP32" type="ScaleShift">
+		<layer id="9" name="Mul1_176/Fused_Mul_" precision="FP32" type="ScaleShift">
 			<input>
 				<port id="0">
-					<dim>100</dim>
+					<dim>1</dim>
 					<dim>120</dim>
 					<dim>1</dim>
 				</port>
 			</input>
 			<output>
 				<port id="3">
-					<dim>100</dim>
+					<dim>1</dim>
 					<dim>120</dim>
 					<dim>1</dim>
 				</port>
@@ -191,17 +191,17 @@
 			</blobs>
 		</layer>
 		<layer id="10" name="62" precision="FP32" type="Reshape">
-			<data dim="100, 120"/>
+			<data dim="1, 120"/>
 			<input>
 				<port id="0">
-					<dim>100</dim>
+					<dim>1</dim>
 					<dim>120</dim>
 					<dim>1</dim>
 				</port>
 			</input>
 			<output>
 				<port id="1">
-					<dim>100</dim>
+					<dim>1</dim>
 					<dim>120</dim>
 				</port>
 			</output>
@@ -210,13 +210,13 @@
 			<data alpha="0" beta="0" out-size="84"/>
 			<input>
 				<port id="0">
-					<dim>100</dim>
+					<dim>1</dim>
 					<dim>120</dim>
 				</port>
 			</input>
 			<output>
 				<port id="3">
-					<dim>100</dim>
+					<dim>1</dim>
 					<dim>84</dim>
 				</port>
 			</output>
@@ -226,32 +226,32 @@
 			</blobs>
 		</layer>
 		<layer id="12" name="64" precision="FP32" type="Reshape">
-			<data dim="100, 84, 1"/>
+			<data dim="1, 84, 1"/>
 			<input>
 				<port id="0">
-					<dim>100</dim>
+					<dim>1</dim>
 					<dim>84</dim>
 				</port>
 			</input>
 			<output>
 				<port id="1">
-					<dim>100</dim>
+					<dim>1</dim>
 					<dim>84</dim>
 					<dim>1</dim>
 				</port>
 			</output>
 		</layer>
-		<layer id="13" name="Mul1_185/Fused_Mul_/FusedScaleShift_" precision="FP32" type="ScaleShift">
+		<layer id="13" name="Mul1_149/Fused_Mul_" precision="FP32" type="ScaleShift">
 			<input>
 				<port id="0">
-					<dim>100</dim>
+					<dim>1</dim>
 					<dim>84</dim>
 					<dim>1</dim>
 				</port>
 			</input>
 			<output>
 				<port id="3">
-					<dim>100</dim>
+					<dim>1</dim>
 					<dim>84</dim>
 					<dim>1</dim>
 				</port>
@@ -262,17 +262,17 @@
 			</blobs>
 		</layer>
 		<layer id="14" name="66" precision="FP32" type="Reshape">
-			<data dim="100, 84"/>
+			<data dim="1, 84"/>
 			<input>
 				<port id="0">
-					<dim>100</dim>
+					<dim>1</dim>
 					<dim>84</dim>
 					<dim>1</dim>
 				</port>
 			</input>
 			<output>
 				<port id="1">
-					<dim>100</dim>
+					<dim>1</dim>
 					<dim>84</dim>
 				</port>
 			</output>
@@ -281,13 +281,13 @@
 			<data alpha="0" beta="0" out-size="10"/>
 			<input>
 				<port id="0">
-					<dim>100</dim>
+					<dim>1</dim>
 					<dim>84</dim>
 				</port>
 			</input>
 			<output>
 				<port id="3">
-					<dim>100</dim>
+					<dim>1</dim>
 					<dim>10</dim>
 				</port>
 			</output>
@@ -297,32 +297,32 @@
 			</blobs>
 		</layer>
 		<layer id="16" name="68" precision="FP32" type="Reshape">
-			<data dim="100, 10, 1"/>
+			<data dim="1, 10, 1"/>
 			<input>
 				<port id="0">
-					<dim>100</dim>
+					<dim>1</dim>
 					<dim>10</dim>
 				</port>
 			</input>
 			<output>
 				<port id="1">
-					<dim>100</dim>
+					<dim>1</dim>
 					<dim>10</dim>
 					<dim>1</dim>
 				</port>
 			</output>
 		</layer>
-		<layer id="17" name="Mul1_176/Fused_Mul_/FusedScaleShift_" precision="FP32" type="ScaleShift">
+		<layer id="17" name="Mul1_158/Fused_Mul_" precision="FP32" type="ScaleShift">
 			<input>
 				<port id="0">
-					<dim>100</dim>
+					<dim>1</dim>
 					<dim>10</dim>
 					<dim>1</dim>
 				</port>
 			</input>
 			<output>
 				<port id="3">
-					<dim>100</dim>
+					<dim>1</dim>
 					<dim>10</dim>
 					<dim>1</dim>
 				</port>
@@ -333,17 +333,17 @@
 			</blobs>
 		</layer>
 		<layer id="18" name="70" precision="FP32" type="Reshape">
-			<data dim="100, 10"/>
+			<data dim="1, 10"/>
 			<input>
 				<port id="0">
-					<dim>100</dim>
+					<dim>1</dim>
 					<dim>10</dim>
 					<dim>1</dim>
 				</port>
 			</input>
 			<output>
 				<port id="1">
-					<dim>100</dim>
+					<dim>1</dim>
 					<dim>10</dim>
 				</port>
 			</output>
