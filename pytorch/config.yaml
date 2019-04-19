@@ -1,0 +1,31 @@
+LENET:
+    dataset: 'mnist'
+    lr: 0.001
+    batchsize: 100
+    num_epochs: 10
+    model_type: "lenet"
+    init_type: glorot
+    quantization: "normal" # "INT", "BNN", ""
+    activation_width: 8
+    weight_width: 2
+    operation_mode: "normal" # retrain, normal, inference
+    experiment_name: "mnist"
+    trained_model: "./2019_03_08_16_35_37_840373.pkl"
+    #experiment_name: "a8_w2"
+    # operation_mode: "normal"
+    # trained_model: ""
+MLP:
+    dataset: 'mnist'
+    lr: 0.001
+    batchsize: 100
+    num_epochs: 100
+    model_type: "mlp"
+    init_type: glorot
+    operation_mode: "normal"
+    trained_model: ""
+    quantization: ""
+    activation_width: 8
+    weight_width: 2
+    operation_mode: "retrained"
+    trained_model: ""
+    experiment_name: ""

@@ -1,0 +1,1 @@
+../../MyScripts/get_mnist_img.py

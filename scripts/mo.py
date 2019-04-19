@@ -1,0 +1,1 @@
+/opt/intel/computer_vision_sdk/deployment_tools/model_optimizer/mo.py
