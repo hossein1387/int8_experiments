@@ -59,22 +59,35 @@ class LENET(BaseModel):
         self.conv1b_bn = BatchNorm2d(6   )
         self.conv2b_bn = BatchNorm2d(16  )
         self.conv3b_bn = BatchNorm2d(120 )
-        self.conv4b_bn = BatchNorm1d(120 )
-        self.conv5b_bn = BatchNorm1d(84  )
-        self.conv6b_bn = BatchNorm1d(10  )
+        # self.conv4b_bn = BatchNorm1d(120 )
+        # self.conv5b_bn = BatchNorm1d(84  )
+        # self.conv6b_bn = BatchNorm1d(10  )
 
         self.maxpool   = MaxPool2d(kernel_size=(2, 2), stride=2)
 
     def forward(self, x):
-        import ipdb as pdb; pdb.set_trace()
+        #import ipdb as pdb; pdb.set_trace()
         if(self.use_batch_norm):
-            layer1_out = self.maxpool(self.conv1b_bn(self.cnn1(x)))
-            layer2_out = self.maxpool(self.conv2b_bn(self.cnn2(layer1_out)))
-            layer3_out = self.conv3b_bn(self.cnn3(layer2_out))
-            out = layer3_out.view(layer3_out.size(0), -1)
-            out = self.conv4b_bn(self.fc1(out))
-            out = self.conv5b_bn(self.fc2(out))
-            out = self.conv6b_bn(self.fc3(out))
+            #layer1
+            out = self.cnn1(x)
+            out = self.conv1b_bn(out)
+            out = self.maxpool(out)
+            #layer2
+            out = self.cnn2(out)
+            out = self.conv2b_bn(out)
+            out = self.maxpool(out)
+            #layer3
+            out = self.cnn3(out)
+            out = self.conv3b_bn(out)
+
+            out = out.view(out.size(0), -1)
+
+            out = self.fc1(out)
+            # out = self.conv4b_bn(out)
+            out = self.fc2(out)
+            # out = self.conv5b_bn(out)
+            out = self.fc3(out)
+            # out = self.conv6b_bn(out)
         else:
             layer1_out = self.maxpool(self.cnn1(x))
             layer2_out = self.maxpool(self.cnn2(layer1_out))

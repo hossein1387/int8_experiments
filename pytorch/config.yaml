@@ -2,7 +2,7 @@ LENET:
     dataset: 'mnist'
     lr: 0.001
     batchsize: 100
-    num_epochs: 10
+    num_epochs: 1
     model_type: "lenet"
     init_type: glorot
     quantization: "normal" # "INT", "BNN", ""
@@ -10,7 +10,7 @@ LENET:
     weight_width: 2
     operation_mode: "normal" # retrain, normal, inference
     experiment_name: "mnist"
-    trained_model: "./2019_03_08_16_35_37_840373.pkl"
+    trained_model: "./mnist.pkl"
     #experiment_name: "a8_w2"
     # operation_mode: "normal"
     # trained_model: ""

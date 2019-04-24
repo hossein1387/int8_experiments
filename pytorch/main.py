@@ -88,15 +88,6 @@ if __name__ == '__main__':
     config = config.config_dict
     model, criterion, optimizer, scheduler = build_model(config)
     # import ipdb as pdb; pdb.set_trace()
-    if args['export_onnx']:
-        import sys
-        x=torch.randn((1,1,28,28))
-        if config['experiment_name']:
-            model_name = config['experiment_name']
-        else:
-            model_name = "mnist"
-        torch.onnx._export(model, x, model_name+'.onnx', export_params=True)
-        sys.exit()
     if torch.cuda.is_available():
         model = model.cuda()
     train_loader, test_loader, train_dataset, test_dataset = utility.load_dataset(config)
@@ -106,4 +97,5 @@ if __name__ == '__main__':
         train_model(model, criterion, optimizer, scheduler, train_loader, train_dataset, test_loader, config)
     # test_model(test_loader)
     # Save the Trained Model
+    # import ipdb as pdb; pdb.set_trace()
     utility.save_model(config=config, model=model)
