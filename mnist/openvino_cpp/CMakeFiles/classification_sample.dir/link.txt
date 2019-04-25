@@ -1,0 +1,1 @@
+/usr/bin/c++  -O3 -DNDEBUG  -rdynamic CMakeFiles/classification_sample.dir/main.cpp.o  -o classification_sample -lIE::ie_cpu_extension -lformat_reader -lgflags -lpthread 
