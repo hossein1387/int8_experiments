@@ -1,3 +1,4 @@
+import argparse
 import torch
 import torch.onnx
 import onnx
@@ -7,7 +8,16 @@ import config
 from openvino.inference_engine import IENetwork, IEPlugin
 import numpy as np
 test_dataset = 'data/mnist_test_data.npz'
-openvino_inst_path = "/opt/intel/computer_vision_sdk"
+openvino_inst_path = "/opt/intel/openvino"
+
+def parse_args():
+    parser = argparse.ArgumentParser()
+    parser.add_argument('-f', '--configfile', help='config file in yaml format', required=False, default="config.yaml")
+    parser.add_argument('-t', '--modelype', help='type of model to run', required=False, default="MLP")
+    parser.add_argument('-w', '--weights', help='binary file containing weights', required=False)
+    parser.add_argument('-m', '--model', help='xml file containing model', required=False)
+    args = parser.parse_args()
+    return vars(args)
 
 def export_to_onnx(config):
     util.print_banner("exporting {0} to ONNX".format(config['trained_model']), color='green', verbosity="VERB_LOW")
@@ -66,19 +76,27 @@ def run_inference(exec_net, input_blob, output_blob, images, labels):
     print_perf_counts(exec_net)
     return accuracy
 
-def optimize_model(onnx_file):
-    util.print_banner("Running OpenVino optimizer on {0}".format(onnx_file), color='green', verbosity="VERB_LOW")
-    cmd = "python {0}/deployment_tools/model_optimizer/mo.py --input_model={1}".format(openvino_inst_path, onnx_file)
-    util.run_command(cmd)
-    model_xml = onnx_file.split(".onnx")[0] + ".xml"
-    model_bin = onnx_file.split(".onnx")[0] + ".bin"
+def optimize_model(expr_name, onnx_file, model_xml, weight_bin):
+    run_opt = False
+    if (model_xml == None):
+        util.print_log("Could not find xml model", id_str="warning")
+        run_opt = True
+    if (weight_bin == None):
+        util.print_log("Could not find binary weights", id_str="warning")
+        run_opt = True
+    if run_opt:
+        util.print_banner("Running OpenVino optimizer on {0}".format(onnx_file), color='green', verbosity="VERB_LOW")
+        cmd = "python {0}/deployment_tools/model_optimizer/mo.py --input_model={1} --model_name {2}".format(openvino_inst_path, onnx_file, expr_name)
+        util.run_command(cmd, verbosity="VERB_LOW")
+        model_xml, weight_bin = expr_name+".xml", expr_name+".bin"
     # load model
-    exec_net, input_blob, output_blob = load_model('CPU', model_xml, model_bin)
-    return exec_net, input_blob, output_blob
+    # import ipdb as pdb; pdb.set_trace()
+    return model_xml, weight_bin
 
-def main(config):
-    onnx_file = export_to_onnx(config)
-    exec_net, input_blob, output_blob = optimize_model(onnx_file)
+def main(config, model_xml, weight_bin):
+    onnx_file = export_to_onnx(config) 
+    model_xml, weight_bin = optimize_model(config['experiment_name'], onnx_file, model_xml, weight_bin)
+    exec_net, input_blob, output_blob = load_model("CPU", model_xml, weight_bin)
     # load input
     images, labels = load_input(test_dataset)
     # run inference
@@ -86,11 +104,13 @@ def main(config):
     print('accuracy = {}'.format(accuracy))
 
 if __name__=='__main__':
-    args = util.parse_args()
+    args = parse_args()
     model_type = args['modelype']
     config_file = args['configfile']
+    model_xml = args['model']
+    weight_bin = args['weights']
     config = config.Configuration(model_type, config_file)
     print(config.get_config_str())
     config = config.config_dict
-    main(config)
+    main(config, model_xml, weight_bin)
 

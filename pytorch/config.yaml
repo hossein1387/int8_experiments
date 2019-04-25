@@ -2,7 +2,7 @@ LENET:
     dataset: 'mnist'
     lr: 0.001
     batchsize: 100
-    num_epochs: 1
+    num_epochs: 100
     model_type: "lenet"
     init_type: glorot
     quantization: "normal" # "INT", "BNN", ""
