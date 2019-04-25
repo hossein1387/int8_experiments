@@ -1,3 +1,0 @@
-/home/mhossein/myRepos/int8_experiment/openvino_cpp/CMakeFiles/rebuild_cache.dir
-/home/mhossein/myRepos/int8_experiment/openvino_cpp/CMakeFiles/edit_cache.dir
-/home/mhossein/myRepos/int8_experiment/openvino_cpp/CMakeFiles/classification_sample.dir
