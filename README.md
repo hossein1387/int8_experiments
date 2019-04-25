@@ -1,7 +1,7 @@
 # Using OpenVino to run a Pytorch model on Intel CPU
 
 
-# First train your model:
+## First train your model:
     cd $int8_experiment/pytorch
     python main.py -f config.yaml -t LENET
     ========================================================
@@ -24,7 +24,7 @@
     [2] Test Accuracy of the model on the 10000 test images: 97.96 , lr:0.0009801, loss:0.097614221
     ...
 
-# Run Openvino optimzer and inference engine:
+## Run Openvino optimzer and inference engine:
     cd $int8_experiment/openvino_py
     python openvino_mnist.py -f config.yaml -t LENET
     ========================================================
@@ -92,7 +92,7 @@
     accuracy = 0.8979
 
 
-# Quantize model for int8:
+## Quantize model for int8:
 
     ~/inference_engine_samples_build/intel64/Release/calibration_tool -t C -d CPU -i ./mnist_dataset/mnist_data -m mnist.xml -threshold 10
     [ INFO ] InferenceEngine: 
