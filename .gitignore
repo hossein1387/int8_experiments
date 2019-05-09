@@ -1,3 +1,6 @@
 *.png
 *.xml
 *.bin
+*.onnx
+*.swp
+*.pyc
