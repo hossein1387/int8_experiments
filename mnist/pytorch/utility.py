@@ -47,7 +47,7 @@ def print_log(log_str, id_str="INFO", color="white", verbosity="VERB_LOW"):
                 color = "green"
         print(colored(("[{0:<7}]   {1}".format(id_str, log_str)), color))
 
-def print_banner(banner_str, color="white", verbosity=verbose["VERB_HIGH"]):
+def print_banner(banner_str, color="white", verbosity="VERB_HIGH"):
     print_log("=======================================================================", color=color, verbosity=verbosity)
     print_log(banner_str, color=color, verbosity=verbosity)
     print_log("=======================================================================", color=color, verbosity=verbosity)
@@ -116,7 +116,25 @@ def save_model(model, config):
         if os.path.exists(experiment_name+".pkl"):
             experiment_name += "_"+current_datetime
     experiment_name += ".pkl"
+    print("saving model to {}".format(experiment_name))
     torch.save(model.state_dict(), experiment_name)
+    export_torch_to_onnx(model, (100, 1, 28, 28))
 
-
+def export_torch_to_onnx(model, shape):
+    batch_size, nb_channels, w, h = shape
+    import torch
+    #import ipdb as pdb; pdb.set_trace()
+    if isinstance(model, torch.nn.Module):
+        model_name =  model.__class__.__name__
+        # create the imput placeholder for the model
+        # note: we have to specify the size of a batch of input images
+        input_placeholder = torch.randn(batch_size, nb_channels, w, h)
+        onnx_model_fname = model_name + ".onnx"
+        # export pytorch model to onnx
+        torch.onnx.export(model, input_placeholder, onnx_model_fname)
+        print("{0} was exported to onnx: {1}".format(model_name, onnx_model_fname))
+        return onnx_model_fname
+    else:
+        print("Unsupported model file")
+        return
 

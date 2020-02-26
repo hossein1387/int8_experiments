@@ -60,6 +60,7 @@ def train_model(model, criterion, optimizer, scheduler, train_loader, train_data
     num_epochs = config['num_epochs']
     batch_size = config['batchsize']
     model_type = config['model_type']
+    top_test_acc = 0
     for epoch in range(num_epochs):
         for i, (images, labels) in enumerate(train_loader):
             if torch.cuda.is_available():
@@ -77,6 +78,9 @@ def train_model(model, criterion, optimizer, scheduler, train_loader, train_data
         scheduler.step()
 #        import ipdb as pdb; pdb.set_trace()
         print('[{0}] Test Accuracy of the model on the 10000 test images: {1} , lr:{2}, loss:{3}'.format(epoch, test_accuracy, get_lr(optimizer), float(loss.data.cpu().numpy())))
+        if test_accuracy > top_test_acc :
+            utility.save_model(config=config, model=model)
+            top_test_acc = test_accuracy
         # print('Test Accuracy of the model on the 10000 test images: {0}'.format(test_accuracy))
 
 if __name__ == '__main__':
@@ -98,4 +102,3 @@ if __name__ == '__main__':
     # test_model(test_loader)
     # Save the Trained Model
     # import ipdb as pdb; pdb.set_trace()
-    utility.save_model(config=config, model=model)
